@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { UserController } from "./user.controller";
+import { AuthController } from "./auth.controller";
 
-export class UserRoutes {
+export class AuthRoutes {
     constructor(){}
 
     public static router(): Router{
         const router = Router()
-        const userController = new UserController()
+        const userController = new AuthController()
 
         router.get('/', userController.getAllUsers)
 

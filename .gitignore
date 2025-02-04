@@ -1,4 +1,6 @@
 /dist
+/db_data
 node_modules
-
 pnpm-lock.yaml
+
+.env
