@@ -8,7 +8,8 @@ export class AuthRoutes {
         const router = Router()
         const userController = new AuthController()
 
-        router.get('/', userController.getAllUsers)
+        router.post('/', userController.login)
+        router.post('/register', userController.register)
 
         return router
     }
