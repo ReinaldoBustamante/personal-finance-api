@@ -1,6 +1,6 @@
-import { BcryptAdapter } from "../../config/adapters/bcrypt.adapter";
 import { prisma } from "../../config/db/prisma";
-import { RegisterUserDto } from "../dtos/auth/registerUser.dto";
+import { BcryptAdapter , JWTAdapter} from "../../config/adapters";
+import { LoginUserDto, RegisterUserDto } from "../dtos";
 import { CustomError } from "../error/customError";
 
 export class AuthServices {
@@ -27,8 +27,35 @@ export class AuthServices {
                 name
             }
         })
+        
         const {password: userPassword, ...userEntity} = user
-
         return userEntity
+    }
+
+    public async loginUser(loginUserDto: LoginUserDto) {
+        const {email, password} = loginUserDto
+        //find user
+        const user = await prisma.user.findUnique({
+            where:{
+                email
+            }
+        })
+        if(!user) throw CustomError.notFound('User not found')
+        // verify password
+        const isCredentialsCorrect = await BcryptAdapter.comparePassword(password, user.password)
+        if(!isCredentialsCorrect) throw CustomError.unauthorized('Credentials incorrect.')
+        // JWT
+        const token = JWTAdapter.signToken({
+            id: user.id,
+            name: user.name,
+            email: user.email
+        })
+
+        const {password: userPassword, ...userEntity} = user
+        return {
+            user: userEntity,
+            token: token
+        }
+        
     }
 }

@@ -12,9 +12,18 @@ export class CustomError extends Error {
         return new CustomError(message, 400)
     }
 
+    public static unauthorized(message: string) {
+        return new CustomError(message, 401)
+    }
+    
+    public static notFound(message: string) {
+        return new CustomError(message, 404)
+    }
+    
     public static conflict(message: string) {
         return new CustomError(message, 409)
     }
+    
 
     public static showError(error: unknown, res: Response) {
         if (error instanceof CustomError) {

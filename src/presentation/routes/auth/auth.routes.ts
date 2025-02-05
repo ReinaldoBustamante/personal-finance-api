@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { AuthController } from "./auth.controller";
 import { AuthServices } from "../../../domain/services/auth.service";
+import { AuthMiddleware } from "../../middlewares/Auth.middleware";
 
 export class AuthRoutes {
     constructor(){}
@@ -12,7 +13,7 @@ export class AuthRoutes {
 
         router.post('/', userController.login)
         router.post('/register', userController.register)
-
+    
         return router
     }
 }

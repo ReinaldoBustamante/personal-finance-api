@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { RegisterUserDto } from "../../../domain/dtos/auth/registerUser.dto"
+import { RegisterUserDto, LoginUserDto } from "../../../domain/dtos"
 import { CustomError } from "../../../domain/error/customError"
 import { AuthServices } from "../../../domain/services/auth.service"
 
@@ -19,9 +19,15 @@ export class AuthController {
         }
     }
 
-    public login = (req: Request, res: Response) => {
-        res.json({
-            message: 'not implemented'
-        })
+    public login = async (req: Request, res: Response) => {
+        const [error, loginUserDto] = LoginUserDto.create(req.body)
+        try {
+            if (error) throw CustomError.badRequest(error)
+            const user = await this.authServices.loginUser(loginUserDto!)
+            res.json(user)
+        } catch (error) {
+            CustomError.showError(error, res)
+        }
     }
+
 }

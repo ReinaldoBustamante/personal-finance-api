@@ -1,4 +1,4 @@
-import { hash } from 'bcrypt'
+import { hash, compare } from 'bcrypt'
 
 export class BcryptAdapter {
     constructor() { }
@@ -7,5 +7,10 @@ export class BcryptAdapter {
         const saltRounds = 10;
         const passwordHashed = await hash(password, saltRounds)
         return passwordHashed
+    }
+
+    public static async comparePassword(password: string, hash:string){
+        const isCorrect = await compare(password, hash)
+        return isCorrect
     }
 }

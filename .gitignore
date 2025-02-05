@@ -2,5 +2,5 @@
 /db_data
 node_modules
 pnpm-lock.yaml
-
+yarn.lock
 .env
