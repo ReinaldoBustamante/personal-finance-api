@@ -52,6 +52,7 @@ export class AuthServices {
         })
 
         const {password: userPassword, ...userEntity} = user
+
         return {
             user: userEntity,
             token: token
