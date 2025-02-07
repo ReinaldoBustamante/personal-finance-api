@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { UserRoutes } from "./users/users.routes";
+import { AuthRoutes } from "./auth/auth.routes";
 
 export class AppRoutes {
     constructor() { }
@@ -7,7 +7,7 @@ export class AppRoutes {
     public static router(): Router {
         const router = Router()
         
-        router.use('/user', UserRoutes.router())
+        router.use('/auth', AuthRoutes.router())
 
         return router
     }

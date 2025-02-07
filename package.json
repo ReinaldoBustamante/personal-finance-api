@@ -3,22 +3,33 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "tsnd --respawn --clear ./src/app.ts",
     "build": "rimraf ./dist && npx tsc",
-    "start": "npm run build && node ./dist/app.js"
+    "start": "npm run build && node ./dist/app.js",
+    "migrate": "npx prisma migrate dev"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jest": "^29.5.14",
+    "@types/jsonwebtoken": "^9.0.8",
     "@types/node": "^22.13.1",
+    "jest": "^29.7.0",
+    "prisma": "^6.3.1",
     "rimraf": "^6.0.1",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.3"
   },
   "dependencies": {
+    "@prisma/client": "6.3.1",
     "@types/express": "^5.0.0",
-    "express": "^4.21.2"
+    "bcrypt": "^5.1.1",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2"
   }
 }
