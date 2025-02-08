@@ -12,6 +12,7 @@ export class ExpenseRoutes{
         
         router.get('/', expenseControllers.getExpenses)
         router.post('/', expenseControllers.createExpense)
+       
         return router
     }
 }
