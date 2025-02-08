@@ -12,8 +12,6 @@ export class ExpenseControllers {
         const id = req.body.user.id
         const { limit, offset } = req.query
         try {
-            if (!limit) throw CustomError.badRequest('Limit query param is mandatory');
-            if (+limit > 500) throw CustomError.badRequest('Limit must be less than or equal to 500.');
             if (!id) throw CustomError.unauthorized('User not logged')
             const expenses = await this.expenseService.getExpenses(id, { limit: Number(limit), offset: Number(offset) || 0 })
             res.json(expenses)

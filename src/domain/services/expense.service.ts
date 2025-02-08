@@ -5,6 +5,7 @@ import { CustomError } from "../error/customError";
 export class ExpenseService {
 
     public async getExpenses(id: number, pagination: { limit: number, offset: number }) {
+        
         const user = await prisma.user.findUnique({
             where: {
                 id
@@ -18,7 +19,7 @@ export class ExpenseService {
             },
             take: pagination.limit,
             skip: pagination.offset,
-            
+
         })
 
         const totalCount = await prisma.expense.count({
