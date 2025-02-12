@@ -19,7 +19,6 @@ export class ExpenseService {
             },
             take: pagination.limit,
             skip: pagination.offset,
-
         })
 
         const totalCount = await prisma.expense.count({
@@ -27,6 +26,7 @@ export class ExpenseService {
                 user_id: id
             }
         })
+        
         if (totalCount <= pagination.offset) throw CustomError.badRequest(`Offset must be less than: ${totalCount}`)
         const totalPages = Math.ceil(totalCount / pagination.limit)
         const currentPage = Math.floor(pagination.offset / pagination.limit) + 1
